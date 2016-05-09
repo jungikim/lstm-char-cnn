@@ -112,8 +112,10 @@ function BatchLoaderUnk.text_to_tensor(in_vocabfile, input_files, out_vocabfile,
 -- load vocab file
   f = io.open(in_vocabfile, 'r')
   for line in f:lines() do
-    idx2word[#idx2word + 1] = line -- create word-idx/idx-word mappings
-    word2idx[line] = #idx2word
+    if word2idx[line] == nil then
+      idx2word[#idx2word + 1] = line -- create word-idx/idx-word mappings
+      word2idx[line] = #idx2word
+    end
   end
   f:close()
 
